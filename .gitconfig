@@ -1,0 +1,7 @@
+[user]
+    name = nickth3man
+    email = nickth3man@gmail.com
+[core]
+    editor = code --wait
+[init]
+    defaultBranch = main
