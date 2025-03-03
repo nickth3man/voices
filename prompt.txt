@@ -1,0 +1,46 @@
+Create a multi-modal audio/video processing application that performs the following functions:
+
+Input Processing:
+- Accept audio files (.mp3, .wav, .aac, etc.) and video files (.mp4, .mov, .avi)
+- Validate file integrity and format compatibility
+- Extract audio stream from video files if necessary
+
+Voice Isolation:
+- Implement source separation algorithms to isolate distinct voices
+- Filter out background noise and music
+- Maintain audio quality during separation process
+- Generate individual audio files for each detected speaker
+
+Speaker Identification:
+For audio-only files:
+- Use voice recognition algorithms to create unique voice prints
+- Compare voice prints against existing database entries
+- Extract any available audio metadata
+
+For video files:
+- Implement facial recognition to detect and track speakers
+- Cross-reference facial data with:
+  * Video metadata
+  * Social media profiles
+  * Public figure databases
+  * News archives
+- Match facial recognition data with isolated voice tracks
+
+File Management:
+- Create standardized naming convention: [Speaker_Name]_[Date]_[Source]_[ID]
+- Generate metadata tags for each file including:
+  * Speaker demographics
+  * Recording context
+  * Confidence score of identification
+  * Source material reference
+- Organize files in a structured local database with:
+  * Searchable indexes
+  * Cross-referencing capabilities
+  * Version control
+  * Backup functionality
+
+Export specifications:
+- Save isolated voice tracks in high-quality audio format
+- Include option for multiple export formats
+- Maintain original timestamps
+- Generate processing report for each session
