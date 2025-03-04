@@ -11,6 +11,11 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Dashboard from './pages/Dashboard';
 import ModelComparison from './models/ModelComparison';
+import AudioVisualization from './audio/AudioVisualization';
+import ProcessingConfig from './processing/ProcessingConfig';
+import FeedbackForm from './feedback/FeedbackForm';
+import FeedbackList from './feedback/FeedbackList';
+import FeedbackDashboard from './feedback/FeedbackDashboard';
 
 const App = () => {
   const [connectionStatus, setConnectionStatus] = useState({
@@ -93,6 +98,16 @@ const App = () => {
     switch (currentView) {
       case 'model-comparison':
         return <ModelComparison />;
+      case 'audio-visualization':
+        return <AudioVisualization />;
+      case 'processing-config':
+        return <ProcessingConfig />;
+      case 'feedback-dashboard':
+        return <FeedbackDashboard />;
+      case 'feedback-form':
+        return <FeedbackForm onSubmitSuccess={() => handleNavigate('feedback-dashboard')} />;
+      case 'feedback-list':
+        return <FeedbackList />;
       case 'dashboard':
       default:
         return (

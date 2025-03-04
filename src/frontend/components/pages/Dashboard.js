@@ -40,6 +40,21 @@ const Dashboard = ({ onTestConnection, connectionStatus, onNavigate }) => {
               Model Comparison for voice separation quality
             </a>
           </li>
+          <li>
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('audio-visualization'); }}>
+              Enhanced Audio Visualization with multi-track display
+            </a>
+          </li>
+          <li>
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('processing-config'); }}>
+              Processing Configuration for model and pipeline settings
+            </a>
+          </li>
+          <li>
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('feedback-dashboard'); }}>
+              Feedback Dashboard for analytics and user feedback management
+            </a>
+          </li>
         </ul>
       </div>
       
@@ -51,6 +66,24 @@ const Dashboard = ({ onTestConnection, connectionStatus, onNavigate }) => {
             onClick={() => onNavigate('model-comparison')}
           >
             Compare Models
+          </button>
+          <button
+            className="action-button"
+            onClick={() => onNavigate('audio-visualization')}
+          >
+            Audio Visualization
+          </button>
+          <button
+            className="action-button"
+            onClick={() => onNavigate('processing-config')}
+          >
+            Processing Config
+          </button>
+          <button
+            className="action-button"
+            onClick={() => onNavigate('feedback-dashboard')}
+          >
+            Feedback Dashboard
           </button>
         </div>
       </div>

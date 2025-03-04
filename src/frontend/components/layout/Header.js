@@ -29,6 +29,22 @@ const Header = ({ connected, statusMessage, currentView, onNavigate }) => {
                 Model Comparison
               </button>
             </li>
+            <li>
+              <button
+                className={currentView === 'audio-visualization' ? 'active' : ''}
+                onClick={() => onNavigate('audio-visualization')}
+              >
+                Audio Visualization
+              </button>
+            </li>
+            <li>
+              <button
+                className={currentView === 'processing-config' ? 'active' : ''}
+                onClick={() => onNavigate('processing-config')}
+              >
+                Processing Config
+              </button>
+            </li>
           </ul>
         </nav>
       </div>

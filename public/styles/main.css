@@ -5,6 +5,9 @@
  */
 
 @import 'model-comparison.css';
+@import 'audio-visualization.css';
+@import 'processing-config.css';
+@import 'feedback.css';
 
 :root {
   /* Color palette */
