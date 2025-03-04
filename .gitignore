@@ -1,18 +1,14 @@
-# Node.js / Electron / React
+# Node.js / Electron / npm
 node_modules/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
-.pnp/
-.pnp.js
-coverage/
-build/
+.pnpm-debug.log
+.npm/
+.yarn/
 dist/
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+out/
+.DS_Store
 
 # Python
 __pycache__/
@@ -21,8 +17,6 @@ __pycache__/
 *.so
 .Python
 env/
-venv/
-ENV/
 build/
 develop-eggs/
 dist/
@@ -34,6 +28,7 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -43,38 +38,11 @@ htmlcov/
 .tox/
 .nox/
 .hypothesis/
-.pytype/
-
-# Poetry
-poetry.lock
-
-# CUDA
-*.i
-*.ii
-*.gpu
-*.ptx
-*.cubin
-*.fatbin
-
-# SQLite
-*.db
-*.sqlite
-*.sqlite3
-
-# Audio/Video processing
-models/
-processed/
-temp/
-output/
-
-# OS specific
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # IDE / Editors
 .idea/
@@ -83,18 +51,61 @@ Thumbs.db
 *.swo
 *~
 .vs/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
 *.sublime-workspace
 *.sublime-project
 
-# Logs
-logs/
-*.log
-
-# Project specific
+# Project-specific
 memory-bank/
 Planning/
 servers/
-.clinerules-architect
-.clinerules-ask
-.clinerules-code
-.clinerules-debug
+.clinerules-*
+*.db
+*.sqlite
+*.sqlite3
+logs/
+temp/
+tmp/
+
+# Audio files
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
+*.m4a
+*.wma
+*.aiff
+*.pcm
+*.raw
+
+# ML models
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.model
+
+# Large data files
+*.csv
+*.json
+*.npy
+*.npz
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+
+# Exceptions
+!public/**/*.json
+!public/**/*.mp3
+!public/**/*.wav
+!src/**/*.json
