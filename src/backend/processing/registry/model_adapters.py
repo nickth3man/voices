@@ -79,36 +79,49 @@ class SVoiceAdapter(VoiceSeparationModel):
         
         Returns:
             Loaded model
-        
-        Note:
-            This is a placeholder implementation. The actual implementation
-            would depend on the SVoice API and model format.
         """
-        # Placeholder for actual SVoice model loading
-        # In a real implementation, this would use the SVoice API to load the model
-        self.logger.info(f"Loading SVoice model from {self.model_path}")
-        
-        # Placeholder model
-        class DummySVoiceModel:
-            def __init__(self, path, device):
-                self.path = path
-                self.device = device
-                self.name = "SVoice"
-                self.version = "1.0.0"
+        try:
+            # Import here to avoid circular imports
+            from ..models.svoice.utils import load_svoice_model
             
-            def to(self, device):
-                return self
+            # Load the model using the SVoice implementation
+            self.logger.info(f"Loading SVoice model from {self.model_path}")
+            return load_svoice_model(self.model_path, device=self.device)
             
-            def __call__(self, mixture, num_speakers=None):
-                # Simulate separation by creating random sources
-                if isinstance(mixture, torch.Tensor):
-                    n_speakers = num_speakers or 2
-                    return torch.randn(n_speakers, mixture.shape[0], device=self.device)
-                else:
-                    n_speakers = num_speakers or 2
-                    return np.random.randn(n_speakers, mixture.shape[0])
-        
-        return DummySVoiceModel(self.model_path, self.device)
+        except ImportError as e:
+            self.logger.warning(f"Could not import SVoice model: {str(e)}")
+            self.logger.warning("Falling back to dummy implementation")
+            
+            # Fallback to dummy implementation if SVoice is not available
+            class DummySVoiceModel:
+                def __init__(self, path, device):
+                    self.path = path
+                    self.device = device
+                    self.name = "SVoice"
+                    self.version = "1.0.0"
+                
+                def to(self, device):
+                    return self
+                
+                def separate(self, mixture, num_speakers=None, **kwargs):
+                    # Simulate separation by creating random sources
+                    if isinstance(mixture, torch.Tensor):
+                        n_speakers = num_speakers or 2
+                        return torch.randn(n_speakers, mixture.shape[0], device=self.device)
+                    else:
+                        n_speakers = num_speakers or 2
+                        return np.random.randn(n_speakers, mixture.shape[0])
+                
+                def get_model_info(self):
+                    return {
+                        "type": "svoice",
+                        "name": "SVoice (Dummy)",
+                        "version": "1.0.0",
+                        "path": self.path,
+                        "device": str(self.device)
+                    }
+            
+            return DummySVoiceModel(self.model_path, self.device)
     
     def separate(
         self,
@@ -129,6 +142,11 @@ class SVoiceAdapter(VoiceSeparationModel):
         """
         self.logger.debug(f"Separating mixture with SVoice, num_speakers={num_speakers}")
         
+        # Check if the model has a separate method (our implementation)
+        if hasattr(self.model, 'separate'):
+            return self.model.separate(mixture, num_speakers=num_speakers, **kwargs)
+        
+        # Fallback for dummy model
         # Convert numpy array to tensor if needed
         is_numpy = isinstance(mixture, np.ndarray)
         if is_numpy:
@@ -157,6 +175,11 @@ class SVoiceAdapter(VoiceSeparationModel):
         Returns:
             Dictionary containing model information
         """
+        # Check if the model has a get_model_info method (our implementation)
+        if hasattr(self.model, 'get_model_info'):
+            return self.model.get_model_info()
+        
+        # Fallback for dummy model
         return {
             "type": "svoice",
             "name": getattr(self.model, "name", "SVoice"),
@@ -330,10 +353,16 @@ def get_model_loader(model_type: str) -> Callable:
         ValueError: If model_type is not supported
     """
     if model_type.lower() == "svoice":
-        def load_svoice(path, **kwargs):
-            adapter = SVoiceAdapter(path, **kwargs)
-            return lambda mixture, **proc_kwargs: adapter.separate(mixture, **proc_kwargs)
-        return load_svoice
+        try:
+            # Try to import the SVoice loader from our implementation
+            from ..models.svoice.utils import create_svoice_registry_loader
+            return create_svoice_registry_loader()
+        except ImportError as e:
+            # Fallback to adapter-based loader
+            def load_svoice(path, **kwargs):
+                adapter = SVoiceAdapter(path, **kwargs)
+                return lambda mixture, **proc_kwargs: adapter.separate(mixture, **proc_kwargs)
+            return load_svoice
     
     elif model_type.lower() == "demucs":
         def load_demucs(path, **kwargs):
