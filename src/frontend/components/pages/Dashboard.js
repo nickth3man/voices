@@ -1,13 +1,13 @@
 /**
  * Dashboard component for the Voices application
- * 
+ *
  * This component serves as the main dashboard/home page of the application.
  * It displays welcome information and connection status.
  */
 
 import React from 'react';
 
-const Dashboard = ({ onTestConnection, connectionStatus }) => {
+const Dashboard = ({ onTestConnection, connectionStatus, onNavigate }) => {
   return (
     <div className="placeholder-content">
       <h2>Welcome to Voices</h2>
@@ -15,13 +15,13 @@ const Dashboard = ({ onTestConnection, connectionStatus }) => {
       
       <div id="connection-status">
         <p>
-          {connectionStatus.connected 
-            ? 'Connected to Python backend' 
+          {connectionStatus.connected
+            ? 'Connected to Python backend'
             : 'Not connected to Python backend'}
         </p>
         <p className="mb-3">{connectionStatus.message}</p>
-        <button 
-          id="test-connection" 
+        <button
+          id="test-connection"
           onClick={onTestConnection}
         >
           Test Connection
@@ -35,7 +35,24 @@ const Dashboard = ({ onTestConnection, connectionStatus }) => {
           <li>Speaker Identification across recordings</li>
           <li>Content Organization by speaker, date, or content</li>
           <li>Batch Processing for large files</li>
+          <li>
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('model-comparison'); }}>
+              Model Comparison for voice separation quality
+            </a>
+          </li>
         </ul>
+      </div>
+      
+      <div className="dashboard-actions mt-4">
+        <h3 className="mb-3">Quick Actions</h3>
+        <div className="action-buttons">
+          <button
+            className="action-button"
+            onClick={() => onNavigate('model-comparison')}
+          >
+            Compare Models
+          </button>
+        </div>
       </div>
     </div>
   );

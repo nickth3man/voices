@@ -299,6 +299,9 @@ def emit_event(event: str, data: Dict[str, Any] = None) -> None:
 def main() -> None:
     """Main entry point for the server."""
     try:
+        # Import handlers (this will register them with the server)
+        from . import register_handlers
+        
         # Start the server
         server.start()
         

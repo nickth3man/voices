@@ -1,6 +1,10 @@
-/* 
+/*
  * Main stylesheet for the Voices application
+ *
+ * Imports all component-specific stylesheets
  */
+
+@import 'model-comparison.css';
 
 :root {
   /* Color palette */
@@ -77,9 +81,43 @@ html, body {
   box-shadow: var(--shadow-sm);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
 .app-header h1 {
   font-size: var(--font-size-xl);
   font-weight: 600;
+  margin-right: var(--spacing-lg);
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-md);
+}
+
+.main-nav button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.main-nav button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: bold;
 }
 
 .status-indicator {
@@ -213,6 +251,46 @@ button:disabled {
   padding: var(--spacing-lg);
   background-color: rgba(0, 0, 0, 0.02);
   border-radius: var(--border-radius-sm);
+}
+
+.dashboard-features a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dashboard-features a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Dashboard actions */
+.dashboard-actions {
+  text-align: left;
+  padding: var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-sm);
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.action-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: var(--secondary-dark);
 }
 
 /* Utility classes */

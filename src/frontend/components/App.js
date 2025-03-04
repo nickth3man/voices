@@ -1,6 +1,6 @@
 /**
  * Main App component for the Voices application
- * 
+ *
  * This component serves as the root of the React component tree
  * and provides the basic layout structure for the application.
  */
@@ -10,12 +10,14 @@ import pythonBridge from '../controllers/PythonBridge';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Dashboard from './pages/Dashboard';
+import ModelComparison from './models/ModelComparison';
 
 const App = () => {
   const [connectionStatus, setConnectionStatus] = useState({
     connected: false,
     message: 'Initializing...'
   });
+  const [currentView, setCurrentView] = useState('dashboard');
 
   useEffect(() => {
     // Check connection on component mount
@@ -82,17 +84,37 @@ const App = () => {
     checkConnection();
   };
 
+  const handleNavigate = (view) => {
+    setCurrentView(view);
+  };
+
+  // Render the current view
+  const renderView = () => {
+    switch (currentView) {
+      case 'model-comparison':
+        return <ModelComparison />;
+      case 'dashboard':
+      default:
+        return (
+          <Dashboard
+            onTestConnection={handleTestConnection}
+            connectionStatus={connectionStatus}
+            onNavigate={handleNavigate}
+          />
+        );
+    }
+  };
+
   return (
     <div className="app-container">
-      <Header 
-        connected={connectionStatus.connected} 
-        statusMessage={connectionStatus.message} 
+      <Header
+        connected={connectionStatus.connected}
+        statusMessage={connectionStatus.message}
+        currentView={currentView}
+        onNavigate={handleNavigate}
       />
       <main className="app-content">
-        <Dashboard 
-          onTestConnection={handleTestConnection} 
-          connectionStatus={connectionStatus}
-        />
+        {renderView()}
       </main>
       <Footer />
     </div>
