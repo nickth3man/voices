@@ -45,6 +45,14 @@ const Header = ({ connected, statusMessage, currentView, onNavigate }) => {
                 Processing Config
               </button>
             </li>
+            <li>
+              <button
+                className={currentView === 'integration-tester' ? 'active' : ''}
+                onClick={() => onNavigate('integration-tester')}
+              >
+                Integration Tests
+              </button>
+            </li>
           </ul>
         </nav>
       </div>

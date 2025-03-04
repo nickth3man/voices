@@ -16,6 +16,7 @@ import ProcessingConfig from './processing/ProcessingConfig';
 import FeedbackForm from './feedback/FeedbackForm';
 import FeedbackList from './feedback/FeedbackList';
 import FeedbackDashboard from './feedback/FeedbackDashboard';
+import IntegrationTester from './testing/IntegrationTester';
 
 const App = () => {
   const [connectionStatus, setConnectionStatus] = useState({
@@ -108,6 +109,8 @@ const App = () => {
         return <FeedbackForm onSubmitSuccess={() => handleNavigate('feedback-dashboard')} />;
       case 'feedback-list':
         return <FeedbackList />;
+      case 'integration-tester':
+        return <IntegrationTester />;
       case 'dashboard':
       default:
         return (

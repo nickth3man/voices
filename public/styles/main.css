@@ -8,6 +8,7 @@
 @import 'audio-visualization.css';
 @import 'processing-config.css';
 @import 'feedback.css';
+@import 'integration-tester.css';
 
 :root {
   /* Color palette */

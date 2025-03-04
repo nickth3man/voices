@@ -13,6 +13,7 @@ from .model_comparison_handlers import MODEL_COMPARISON_HANDLERS
 from .audio_visualization_handlers import AUDIO_VISUALIZATION_HANDLERS
 from .processing_config_handlers import PROCESSING_CONFIG_HANDLERS
 from .feedback_handlers import FEEDBACK_HANDLERS
+from .integration_test_handlers import INTEGRATION_TEST_HANDLERS
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -33,7 +34,9 @@ def register_all_handlers() -> None:
     # Register feedback handlers
     register_feedback_handlers()
     
-    logger.info("All handlers registered")
+    # Register integration test handlers
+    register_integration_test_handlers()
+    
     logger.info("All handlers registered")
 
 
@@ -75,6 +78,14 @@ def register_feedback_handlers() -> None:
         register_command(command, handler)
     
     logger.info(f"Registered {len(FEEDBACK_HANDLERS)} feedback handlers")
+
+
+def register_integration_test_handlers() -> None:
+    """Register integration test command handlers."""
+    for command, handler in INTEGRATION_TEST_HANDLERS.items():
+        register_command(command, handler)
+    
+    logger.info(f"Registered {len(INTEGRATION_TEST_HANDLERS)} integration test handlers")
 
 
 # Register handlers when this module is imported

@@ -1,0 +1,61 @@
+2025-03-04 11:13:42,530 - __main__ - INFO - Starting integration tests
+2025-03-04 11:14:28,027 - __main__ - INFO - Starting integration tests
+2025-03-04 11:14:29,934 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:39:29,130 - __main__ - INFO - Starting integration tests
+2025-03-04 12:39:30,219 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:39:52,008 - __main__ - INFO - Starting integration tests
+2025-03-04 12:39:53,144 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:40:44,581 - __main__ - INFO - Starting integration tests
+2025-03-04 12:40:46,110 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:41:17,745 - __main__ - INFO - Starting integration tests
+2025-03-04 12:41:18,894 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:41:58,158 - __main__ - INFO - Starting integration tests
+2025-03-04 12:41:59,385 - voices.server - INFO - IPC Server initialized
+2025-03-04 12:42:00,922 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:00,922 - integration_tests - INFO - Test environment set up
+2025-03-04 12:42:00,926 - backend.processing.registry.model_registry - INFO - Registered model loader for type: svoice
+2025-03-04 12:42:00,926 - backend.processing.registry.model_registry - INFO - Registered model loader for type: demucs
+2025-03-04 12:42:01,666 - integration_tests - INFO - Test environment cleaned up
+2025-03-04 12:42:01,696 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:01,697 - integration_tests - INFO - Test environment set up
+2025-03-04 12:42:01,697 - backend.processing.models.abstraction - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:01,697 - backend.processing.models.abstraction - INFO - Registered model loader for type: svoice
+2025-03-04 12:42:01,697 - backend.processing.models.abstraction - INFO - Registered model loader for type: demucs
+2025-03-04 12:42:01,697 - backend.processing.models.abstraction - INFO - Initialized VoiceSeparationManager with default model type auto
+2025-03-04 12:42:01,697 - backend.processing.models.abstraction - INFO - Selected SVoice model for 3 speakers
+2025-03-04 12:42:01,698 - backend.processing.models.abstraction - INFO - Selected SVoice model for 3 speakers
+2025-03-04 12:42:01,699 - integration_tests - INFO - Test environment cleaned up
+2025-03-04 12:42:01,719 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:01,719 - integration_tests - INFO - Test environment set up
+2025-03-04 12:42:01,720 - backend.processing.models.abstraction - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:01,720 - backend.processing.models.abstraction - INFO - Registered model loader for type: svoice
+2025-03-04 12:42:01,720 - backend.processing.models.abstraction - INFO - Registered model loader for type: demucs
+2025-03-04 12:42:01,721 - backend.processing.models.abstraction - INFO - Initialized VoiceSeparationManager with default model type auto
+2025-03-04 12:42:01,721 - backend.processing.pipeline.components.VoiceSeparator - INFO - Initialized voice separator with model type auto
+2025-03-04 12:42:01,721 - backend.processing.pipeline.components - INFO - Initialized audio processing pipeline with 5 components
+2025-03-04 12:42:01,721 - backend.processing.pipeline.components - INFO - Processing audio file: test_output\test_audio.wav
+2025-03-04 12:42:01,721 - backend.processing.pipeline.components - INFO - Processing data through pipeline with 5 components
+2025-03-04 12:42:01,721 - backend.processing.pipeline.components - DEBUG - Running component 1/5: AudioLoader
+2025-03-04 12:42:01,722 - backend.processing.pipeline.components.AudioLoader - DEBUG - Processing data with AudioLoader
+2025-03-04 12:42:01,722 - backend.processing.pipeline.components.AudioLoader - INFO - Loading audio from test_output\test_audio.wav
+2025-03-04 12:42:01,729 - backend.processing.pipeline.components.AudioLoader - DEBUG - Normalizing audio
+2025-03-04 12:42:01,729 - backend.processing.pipeline.components - DEBUG - Running component 2/5: AudioPreprocessor
+2025-03-04 12:42:01,729 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Processing data with AudioPreprocessor
+2025-03-04 12:42:01,729 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Preprocessing audio: 48000 samples, 16000Hz
+2025-03-04 12:42:01,729 - backend.processing.pipeline.components - DEBUG - Running component 3/5: VoiceSeparator
+2025-03-04 12:42:01,730 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Processing data with VoiceSeparator
+2025-03-04 12:42:01,730 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Separating voices in audio: (48000,), chunked=False
+2025-03-04 12:42:01,730 - backend.processing.models.abstraction - INFO - Selected SVoice model as default
+2025-03-04 12:42:01,730 - backend.processing.models.abstraction - INFO - Creating new SVoice adapter
+2025-03-04 12:42:01,730 - backend.processing.models.abstraction - INFO - Loading SVoice model from default_model_path
+2025-03-04 12:42:01,730 - integration_tests - WARNING - Pipeline processing failed: Model path not found: default_model_path
+2025-03-04 12:42:01,731 - integration_tests - INFO - Pipeline integration test completed
+2025-03-04 12:42:01,732 - integration_tests - INFO - Test environment cleaned up
+2025-03-04 12:42:01,734 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 12:42:01,735 - integration_tests - INFO - Test environment set up
+2025-03-04 12:42:02,443 - integration_tests - INFO - Test environment cleaned up
+2025-03-04 12:42:02,453 - __main__ - INFO - Tests run: 4
+2025-03-04 12:42:02,453 - __main__ - INFO - Errors: 2
+2025-03-04 12:42:02,453 - __main__ - INFO - Failures: 1
+2025-03-04 12:42:02,453 - __main__ - INFO - Integration tests completed in 4.30 seconds
+2025-03-04 12:42:02,453 - __main__ - INFO - Result: FAILURE
