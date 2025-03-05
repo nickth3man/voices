@@ -1,0 +1,9 @@
+name: real_svoice
+version: 1.0.0
+num_speakers: 2
+model_type: svoice
+description: "Real SVoice model for voice separation"
+parameters:
+  sample_rate: 16000
+  chunk_size: 32000
+  overlap: 0.25

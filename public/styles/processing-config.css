@@ -1,0 +1,381 @@
+/*
+ * Processing Configuration UI Styles
+ *
+ * Styles for the processing configuration component
+ */
+
+.processing-config-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.processing-config-container h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.processing-config-container p.description {
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* Section styles */
+.config-section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.config-section h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+.config-section h3 svg {
+  margin-right: var(--spacing-sm);
+}
+
+.config-section p.section-description {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+}
+
+/* Form controls */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  background-color: var(--card-background);
+}
+
+.form-group select:focus,
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Model selection */
+.model-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.model-card {
+  flex: 1 1 calc(50% - var(--spacing-md));
+  min-width: 250px;
+  padding: var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background-color: var(--card-background);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.model-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.model-card.selected {
+  border-color: var(--primary-color);
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.model-card h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-card h4 span.model-type {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--border-radius-sm);
+}
+
+.model-card p {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+}
+
+.model-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.model-metric {
+  flex: 1 1 calc(50% - var(--spacing-sm));
+  min-width: 100px;
+  padding: var(--spacing-xs);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+}
+
+.model-metric .metric-value {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.model-metric .metric-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-light);
+}
+
+/* Processing parameters */
+.parameter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.parameter-slider {
+  margin-bottom: var(--spacing-md);
+}
+
+.parameter-slider label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+}
+
+.parameter-slider label .parameter-value {
+  font-weight: normal;
+  color: var(--primary-color);
+}
+
+.parameter-slider input[type="range"] {
+  width: 100%;
+  margin: var(--spacing-xs) 0;
+}
+
+/* Output format options */
+.format-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.format-option {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.format-option:hover {
+  border-color: var(--primary-color);
+}
+
+.format-option.selected {
+  border-color: var(--primary-color);
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.format-option .format-icon {
+  font-size: 24px;
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+.format-option .format-name {
+  font-weight: 600;
+}
+
+.format-option .format-description {
+  font-size: var(--font-size-xs);
+  color: var(--text-light);
+}
+
+/* Batch processing settings */
+.batch-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: var(--spacing-sm);
+}
+
+/* Hardware detection */
+.hardware-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.hardware-card {
+  flex: 1 1 calc(33.333% - var(--spacing-md));
+  min-width: 200px;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.hardware-card h4 {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.hardware-card h4 svg {
+  margin-right: var(--spacing-xs);
+}
+
+.hardware-card p {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+.hardware-card .hardware-value {
+  font-weight: 600;
+}
+
+/* Configuration presets */
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.preset-button {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-button:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-color: var(--primary-color);
+}
+
+.preset-button.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.action-buttons button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-buttons .cancel-button {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.action-buttons .cancel-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--text-color);
+}
+
+.action-buttons .save-button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: white;
+}
+
+.action-buttons .save-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.action-buttons .apply-button {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  color: white;
+}
+
+.action-buttons .apply-button:hover {
+  background-color: var(--secondary-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .model-card,
+  .hardware-card {
+    flex: 1 1 100%;
+  }
+  
+  .parameter-grid,
+  .format-options,
+  .batch-settings {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons button {
+    width: 100%;
+  }
+}

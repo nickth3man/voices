@@ -1,0 +1,195 @@
+/* 
+ * Styles for the Model Comparison component
+ */
+
+.model-comparison-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.model-comparison-container h2 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.comparison-setup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-md);
+}
+
+.audio-selection, .model-selection {
+  flex: 1;
+  min-width: 300px;
+}
+
+.audio-selection h3, .model-selection h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-dark);
+}
+
+.model-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.model-item {
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.model-item:last-child {
+  border-bottom: none;
+}
+
+.model-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.model-item input[type="checkbox"] {
+  margin-right: var(--spacing-sm);
+}
+
+.run-comparison-btn {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.run-comparison-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.run-comparison-btn:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.comparison-results {
+  margin-top: var(--spacing-xl);
+}
+
+.comparison-results h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-dark);
+}
+
+.original-audio {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-sm);
+}
+
+.model-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.model-result-card {
+  padding: var(--spacing-lg);
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.model-result-card h4 {
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+.source-buttons {
+  margin-bottom: var(--spacing-md);
+}
+
+.source-buttons h5 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-light);
+}
+
+.source-buttons button {
+  margin-right: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.source-buttons button:hover {
+  background-color: var(--secondary-dark);
+}
+
+.source-buttons button.playing {
+  background-color: var(--accent-color);
+}
+
+.metrics-container {
+  margin-top: var(--spacing-md);
+}
+
+.metrics-container h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-light);
+}
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.metrics-table td {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.metrics-table tr:last-child td {
+  border-bottom: none;
+}
+
+.metrics-table td:first-child {
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.error {
+  color: var(--error-color);
+  margin: var(--spacing-md) 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comparison-setup {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  .model-results-grid {
+    grid-template-columns: 1fr;
+  }
+}

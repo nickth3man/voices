@@ -1,0 +1,9 @@
+2025-03-04 03:30:47,576 - voices.server - INFO - IPC Server initialized
+2025-03-04 03:30:47,577 - voices.server - INFO - IPC Server started
+2025-03-04 03:33:05,465 - voices.server - INFO - IPC Server initialized
+2025-03-04 03:33:05,466 - voices.server - INFO - IPC Server started
+2025-03-04 03:36:00,496 - voices.server - INFO - IPC Server initialized
+2025-03-04 03:36:00,496 - voices.server - INFO - IPC Server started
+2025-03-04 11:14:43,671 - voices.server - INFO - IPC Server initialized
+2025-03-04 11:14:43,672 - voices.server - ERROR - Error in main: attempted relative import with no known parent package
+2025-03-04 11:14:43,672 - voices.server - INFO - IPC Server stopped

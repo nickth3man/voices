@@ -1,0 +1,4 @@
+name: mock_demucs
+version: 1.0.0
+num_speakers: 2
+model_type: demucs

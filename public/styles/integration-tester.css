@@ -1,0 +1,147 @@
+/**
+ * Styles for the Integration Tester component
+ */
+
+.integration-tester {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.integration-tester h2 {
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.integration-tester h3 {
+  margin: 20px 0 10px;
+  color: #444;
+}
+
+.test-config {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.file-path {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 5px;
+  word-break: break-all;
+}
+
+.test-controls {
+  margin-bottom: 20px;
+}
+
+.test-controls button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.test-controls button:hover {
+  background-color: #3a80d2;
+}
+
+.test-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.test-results {
+  margin-bottom: 20px;
+}
+
+.test-results table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.test-results th, .test-results td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.test-results th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.test-results .success {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.test-results .error {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.test-log {
+  margin-top: 20px;
+}
+
+.log-container {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  font-family: monospace;
+}
+
+.log-entry {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.log-timestamp {
+  color: #888;
+  margin-right: 10px;
+}
+
+.log-info {
+  color: #333;
+}
+
+.log-success {
+  color: #2ecc71;
+}
+
+.log-error {
+  color: #e74c3c;
+}
+
+.log-warning {
+  color: #f39c12;
+}
