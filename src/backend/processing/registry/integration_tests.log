@@ -59,3 +59,116 @@
 2025-03-04 12:42:02,453 - __main__ - INFO - Failures: 1
 2025-03-04 12:42:02,453 - __main__ - INFO - Integration tests completed in 4.30 seconds
 2025-03-04 12:42:02,453 - __main__ - INFO - Result: FAILURE
+2025-03-04 14:14:02,314 - __main__ - INFO - Starting integration tests
+2025-03-04 14:14:03,662 - voices.server - INFO - IPC Server initialized
+2025-03-04 14:14:04,197 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 14:14:04,198 - integration_tests - INFO - Test environment set up
+2025-03-04 14:14:04,200 - backend.processing.registry.model_registry - INFO - Registered model loader for type: svoice
+2025-03-04 14:14:04,200 - backend.processing.registry.model_registry - INFO - Registered model loader for type: demucs
+2025-03-04 14:14:04,213 - backend.processing.registry.model_registry - INFO - Saved registry with 1 models
+2025-03-04 14:14:04,213 - backend.processing.registry.model_registry - INFO - Added model SVoice Test (svoice_svoice_test_1741115644) with version v1_1741115644
+2025-03-04 14:14:04,292 - backend.processing.registry.model_registry - INFO - Saved registry with 2 models
+2025-03-04 14:14:04,292 - backend.processing.registry.model_registry - INFO - Added model Demucs Test (demucs_demucs_test_1741115644) with version v1_1741115644
+2025-03-04 14:14:04,292 - backend.processing.models.svoice.utils - INFO - Loading SVoice model from test_output\registry\models\svoice_svoice_test_1741115644\v1_1741115644\model.pt on cpu
+2025-03-04 14:14:04,292 - backend.processing.models.svoice.model - INFO - Loading pretrained SVoice model from test_output\registry\models\svoice_svoice_test_1741115644\v1_1741115644\model.pt
+2025-03-04 14:14:04,307 - backend.processing.models.svoice.model - INFO - Initialized SVoice model with 2 speakers on cpu
+2025-03-04 14:14:04,307 - backend.processing.models.svoice.utils - ERROR - Error loading SVoice model: 'model_state_dict'
+2025-03-04 14:14:04,307 - integration_tests - WARNING - Could not load models: 'model_state_dict'
+2025-03-04 14:14:04,307 - integration_tests - INFO - Model registry integration test completed
+2025-03-04 14:14:04,377 - integration_tests - INFO - Test directory removed successfully
+2025-03-04 14:14:04,377 - integration_tests - INFO - Test environment cleanup completed
+2025-03-04 14:14:04,382 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 14:14:04,382 - integration_tests - INFO - Test environment set up
+2025-03-04 14:14:04,382 - backend.processing.models.abstraction - INFO - Registry index not found, creating new registry
+2025-03-04 14:14:04,383 - backend.processing.models.abstraction - INFO - Registered model loader for type: svoice
+2025-03-04 14:14:04,383 - backend.processing.models.abstraction - INFO - Registered model loader for type: demucs
+2025-03-04 14:14:04,383 - backend.processing.models.abstraction - INFO - Initialized VoiceSeparationManager with default model type auto
+2025-03-04 14:14:04,383 - backend.processing.models.abstraction - INFO - Selected SVoice model for 3 speakers
+2025-03-04 14:14:04,383 - backend.processing.models.abstraction - INFO - Selected SVoice model for 3 speakers
+2025-03-04 14:14:04,447 - integration_tests - INFO - Test directory removed successfully
+2025-03-04 14:14:04,447 - integration_tests - INFO - Test environment cleanup completed
+2025-03-04 14:14:04,452 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 14:14:04,452 - integration_tests - INFO - Test environment set up
+2025-03-04 14:14:04,452 - backend.processing.registry.model_registry - INFO - Registered model loader for type: svoice
+2025-03-04 14:14:04,452 - backend.processing.registry.model_registry - INFO - Registered model loader for type: demucs
+2025-03-04 14:14:04,465 - backend.processing.registry.model_registry - INFO - Saved registry with 1 models
+2025-03-04 14:14:04,465 - backend.processing.registry.model_registry - INFO - Added model SVoice Pipeline Test (svoice_svoice_pipeline_test_1741115644) with version v1_1741115644
+2025-03-04 14:14:04,479 - backend.processing.registry.model_registry - INFO - Saved registry with 2 models
+2025-03-04 14:14:04,480 - backend.processing.registry.model_registry - INFO - Added model Demucs Pipeline Test (demucs_demucs_pipeline_test_1741115644) with version v1_1741115644
+2025-03-04 14:14:04,487 - backend.processing.models.abstraction - INFO - Loaded registry with 2 models
+2025-03-04 14:14:04,488 - backend.processing.models.abstraction - INFO - Registered model loader for type: svoice
+2025-03-04 14:14:04,488 - backend.processing.models.abstraction - INFO - Registered model loader for type: demucs
+2025-03-04 14:14:04,488 - backend.processing.models.abstraction - INFO - Initialized VoiceSeparationManager with default model type auto
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components.VoiceSeparator - INFO - Initialized voice separator with model type auto
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components - INFO - Initialized audio processing pipeline with 5 components
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components - INFO - Processing audio file: test_output\test_audio.wav
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components - INFO - Processing data through pipeline with 5 components
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components - DEBUG - Running component 1/5: AudioLoader
+2025-03-04 14:14:04,488 - backend.processing.pipeline.components.AudioLoader - DEBUG - Processing data with AudioLoader
+2025-03-04 14:14:04,489 - backend.processing.pipeline.components.AudioLoader - INFO - Loading audio from test_output\test_audio.wav
+2025-03-04 14:14:04,495 - backend.processing.pipeline.components.AudioLoader - DEBUG - Normalizing audio
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components - DEBUG - Running component 2/5: AudioPreprocessor
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Processing data with AudioPreprocessor
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Preprocessing audio: 48000 samples, 16000Hz
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components - DEBUG - Running component 3/5: VoiceSeparator
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Processing data with VoiceSeparator
+2025-03-04 14:14:04,496 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Separating voices in audio: (48000,), chunked=False
+2025-03-04 14:14:04,496 - backend.processing.models.abstraction - INFO - Selected SVoice model as default
+2025-03-04 14:14:04,497 - backend.processing.models.svoice.utils - INFO - Loading SVoice model from test_output\registry\models\svoice_svoice_pipeline_test_1741115644\v1_1741115644\model.pt on cpu
+2025-03-04 14:14:04,497 - backend.processing.models.svoice.model - INFO - Loading pretrained SVoice model from test_output\registry\models\svoice_svoice_pipeline_test_1741115644\v1_1741115644\model.pt
+2025-03-04 14:14:04,506 - backend.processing.models.svoice.model - INFO - Initialized SVoice model with 2 speakers on cpu
+2025-03-04 14:14:04,507 - backend.processing.models.svoice.utils - ERROR - Error loading SVoice model: 'model_state_dict'
+2025-03-04 14:14:04,507 - backend.processing.models.abstraction - ERROR - Error loading model svoice_svoice_pipeline_test_1741115644 from registry: 'model_state_dict'
+2025-03-04 14:14:04,507 - backend.processing.models.abstraction - ERROR - Error finding best model of type svoice: Could not load model svoice_svoice_pipeline_test_1741115644 from registry: 'model_state_dict'
+2025-03-04 14:14:04,507 - backend.processing.models.abstraction - INFO - Creating new SVoice adapter
+2025-03-04 14:14:04,508 - backend.processing.models.abstraction - INFO - Using test model path: C:\Users\nicki\Documents\git\voices2\src\backend\processing\models\..\..\..\..\test_output\mock_models\svoice
+2025-03-04 14:14:04,508 - backend.processing.models.abstraction - INFO - Loading SVoice model from C:\Users\nicki\Documents\git\voices2\src\backend\processing\models\..\..\..\..\test_output\mock_models\svoice
+2025-03-04 14:14:04,508 - backend.processing.models.svoice.utils - INFO - Loading SVoice model from C:\Users\nicki\Documents\git\voices2\src\backend\processing\models\..\..\..\..\test_output\mock_models\svoice\model.pt on cpu
+2025-03-04 14:14:04,508 - backend.processing.models.svoice.model - INFO - Loading pretrained SVoice model from C:\Users\nicki\Documents\git\voices2\src\backend\processing\models\..\..\..\..\test_output\mock_models\svoice\model.pt
+2025-03-04 14:14:04,516 - backend.processing.models.svoice.utils - ERROR - Error loading SVoice model: Weights only load failed. In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+Please file an issue with the following so that we can make `weights_only=True` compatible with your use case: WeightsUnpickler error: Unsupported operand 35
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-03-04 14:14:04,516 - integration_tests - WARNING - Pipeline processing failed: Weights only load failed. In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+Please file an issue with the following so that we can make `weights_only=True` compatible with your use case: WeightsUnpickler error: Unsupported operand 35
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-03-04 14:14:04,516 - integration_tests - INFO - Pipeline integration test completed
+2025-03-04 14:14:04,585 - integration_tests - INFO - Test directory removed successfully
+2025-03-04 14:14:04,585 - integration_tests - INFO - Test environment cleanup completed
+2025-03-04 14:14:04,589 - backend.processing.registry.model_registry - INFO - Registry index not found, creating new registry
+2025-03-04 14:14:04,589 - integration_tests - INFO - Test environment set up
+2025-03-04 14:14:04,602 - backend.processing.registry.model_registry - INFO - Saved registry with 1 models
+2025-03-04 14:14:04,602 - backend.processing.registry.model_registry - INFO - Added model SVoice End-to-End (svoice_svoice_end-to-end_1741115644) with version v1_1741115644
+2025-03-04 14:14:04,609 - backend.processing.models.abstraction - INFO - Loaded registry with 1 models
+2025-03-04 14:14:04,610 - backend.processing.models.abstraction - INFO - Registered model loader for type: svoice
+2025-03-04 14:14:04,610 - backend.processing.models.abstraction - INFO - Registered model loader for type: demucs
+2025-03-04 14:14:04,610 - backend.processing.models.abstraction - INFO - Initialized VoiceSeparationManager with default model type svoice
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components.VoiceSeparator - INFO - Initialized voice separator with model type svoice
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components - INFO - Initialized audio processing pipeline with 5 components
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components - INFO - Processing audio file: test_output\test_audio.wav
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components - INFO - Processing data through pipeline with 5 components
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components - DEBUG - Running component 1/5: AudioLoader
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components.AudioLoader - DEBUG - Processing data with AudioLoader
+2025-03-04 14:14:04,610 - backend.processing.pipeline.components.AudioLoader - INFO - Loading audio from test_output\test_audio.wav
+2025-03-04 14:14:04,617 - backend.processing.pipeline.components.AudioLoader - DEBUG - Normalizing audio
+2025-03-04 14:14:04,617 - backend.processing.pipeline.components - DEBUG - Running component 2/5: AudioPreprocessor
+2025-03-04 14:14:04,618 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Processing data with AudioPreprocessor
+2025-03-04 14:14:04,618 - backend.processing.pipeline.components.AudioPreprocessor - DEBUG - Preprocessing audio: 48000 samples, 16000Hz
+2025-03-04 14:14:04,618 - backend.processing.pipeline.components - DEBUG - Running component 3/5: VoiceSeparator
+2025-03-04 14:14:04,618 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Processing data with VoiceSeparator
+2025-03-04 14:14:04,618 - backend.processing.pipeline.components.VoiceSeparator - DEBUG - Separating voices in audio: (48000,), chunked=False
+2025-03-04 14:14:04,618 - backend.processing.models.svoice.utils - INFO - Loading SVoice model from test_output\registry\models\svoice_svoice_end-to-end_1741115644\v1_1741115644\model.pt on cpu
+2025-03-04 14:14:04,619 - backend.processing.models.svoice.model - INFO - Loading pretrained SVoice model from test_output\registry\models\svoice_svoice_end-to-end_1741115644\v1_1741115644\model.pt
+2025-03-04 14:14:04,629 - backend.processing.models.svoice.model - INFO - Initialized SVoice model with 2 speakers on cpu
+2025-03-04 14:14:04,630 - backend.processing.models.svoice.utils - ERROR - Error loading SVoice model: 'model_state_dict'
+2025-03-04 14:14:04,630 - backend.processing.models.abstraction - ERROR - Error loading model svoice_svoice_end-to-end_1741115644 from registry: 'model_state_dict'
+2025-03-04 14:14:04,630 - integration_tests - WARNING - End-to-end integration failed: Could not load model svoice_svoice_end-to-end_1741115644 from registry: 'model_state_dict'
+2025-03-04 14:14:04,630 - integration_tests - INFO - End-to-end integration test completed
+2025-03-04 14:14:04,692 - integration_tests - INFO - Test directory removed successfully
+2025-03-04 14:14:04,692 - integration_tests - INFO - Test environment cleanup completed
+2025-03-04 14:14:04,693 - __main__ - INFO - Tests run: 4
+2025-03-04 14:14:04,693 - __main__ - INFO - Errors: 0
+2025-03-04 14:14:04,693 - __main__ - INFO - Failures: 1
+2025-03-04 14:14:04,694 - __main__ - INFO - Integration tests completed in 2.38 seconds
+2025-03-04 14:14:04,694 - __main__ - INFO - Result: FAILURE

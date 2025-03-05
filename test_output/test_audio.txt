@@ -1,0 +1,2 @@
+This is a mock audio file for testing purposes.
+It simulates a WAV file with audio data.

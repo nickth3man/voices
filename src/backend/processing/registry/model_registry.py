@@ -234,19 +234,65 @@ class ModelRegistry:
         version_dir = model_dir / version_id
         os.makedirs(version_dir, exist_ok=True)
         
-        # Copy model files
-        source_path = Path(model_path)
+        # Validate and sanitize source path
+        source_path = Path(model_path).resolve()
+        
+        # Security checks
+        if not source_path.exists():
+            raise ValueError(f"Model path does not exist: {source_path}")
+            
+        # Prevent path traversal attacks by checking if the resolved path is outside expected directories
+        # Get the absolute path of common parent directories that should contain model files
+        allowed_parent_dirs = [
+            Path(os.getcwd()).resolve(),  # Current working directory
+            Path(os.path.expanduser("~")).resolve(),  # User's home directory
+            Path("/tmp").resolve() if os.name != 'nt' else Path(os.environ.get('TEMP', 'C:\\Windows\\Temp')).resolve(),  # Temp directory
+        ]
+        
+        # Check if the source path is within any allowed parent directory
+        is_allowed_path = any(
+            str(source_path).startswith(str(parent_dir))
+            for parent_dir in allowed_parent_dirs
+        )
+        
+        if not is_allowed_path:
+            raise ValueError(f"Model path is outside of allowed directories: {source_path}")
+            
+        # Additional security check for suspicious file names
+        suspicious_patterns = ['.env', 'config.ini', 'credentials', 'password', 'secret', 'token']
+        for pattern in suspicious_patterns:
+            if pattern in str(source_path).lower():
+                self.logger.warning(f"Potentially sensitive file detected: {source_path}")
+                raise ValueError(f"Path contains potentially sensitive file patterns: {source_path}")
+            
+        # Copy model files with validation
         if source_path.is_file():
+            # Validate file type (basic check)
+            valid_extensions = ['.pt', '.pth', '.bin', '.onnx', '.yaml', '.json', '.h5', '.hdf5', '.model']
+            if source_path.suffix.lower() not in valid_extensions:
+                self.logger.warning(f"Unusual file extension for model: {source_path.suffix}")
+                
             target_path = version_dir / source_path.name
             shutil.copy2(source_path, target_path)
             relative_path = str(target_path.relative_to(self.registry_dir))
         else:
-            # Copy directory contents
+            # Copy directory contents with validation
             for item in source_path.glob('*'):
+                # Skip hidden files and directories
+                if item.name.startswith('.'):
+                    continue
+                    
                 if item.is_file():
+                    # Basic file validation
+                    if item.stat().st_size > 1024 * 1024 * 500:  # 500MB limit
+                        self.logger.warning(f"Skipping large file: {item} ({item.stat().st_size / (1024*1024):.2f} MB)")
+                        continue
                     shutil.copy2(item, version_dir / item.name)
                 else:
-                    shutil.copytree(item, version_dir / item.name)
+                    try:
+                        shutil.copytree(item, version_dir / item.name)
+                    except Exception as e:
+                        self.logger.error(f"Error copying directory {item}: {e}")
             relative_path = str(version_dir.relative_to(self.registry_dir))
         
         # Create model version
@@ -326,19 +372,65 @@ class ModelRegistry:
         version_dir = model_dir / version_id
         os.makedirs(version_dir, exist_ok=True)
         
-        # Copy model files
-        source_path = Path(model_path)
+        # Validate and sanitize source path
+        source_path = Path(model_path).resolve()
+        
+        # Security checks
+        if not source_path.exists():
+            raise ValueError(f"Model path does not exist: {source_path}")
+            
+        # Prevent path traversal attacks by checking if the resolved path is outside expected directories
+        # Get the absolute path of common parent directories that should contain model files
+        allowed_parent_dirs = [
+            Path(os.getcwd()).resolve(),  # Current working directory
+            Path(os.path.expanduser("~")).resolve(),  # User's home directory
+            Path("/tmp").resolve() if os.name != 'nt' else Path(os.environ.get('TEMP', 'C:\\Windows\\Temp')).resolve(),  # Temp directory
+        ]
+        
+        # Check if the source path is within any allowed parent directory
+        is_allowed_path = any(
+            str(source_path).startswith(str(parent_dir))
+            for parent_dir in allowed_parent_dirs
+        )
+        
+        if not is_allowed_path:
+            raise ValueError(f"Model path is outside of allowed directories: {source_path}")
+            
+        # Additional security check for suspicious file names
+        suspicious_patterns = ['.env', 'config.ini', 'credentials', 'password', 'secret', 'token']
+        for pattern in suspicious_patterns:
+            if pattern in str(source_path).lower():
+                self.logger.warning(f"Potentially sensitive file detected: {source_path}")
+                raise ValueError(f"Path contains potentially sensitive file patterns: {source_path}")
+            
+        # Copy model files with validation
         if source_path.is_file():
+            # Validate file type (basic check)
+            valid_extensions = ['.pt', '.pth', '.bin', '.onnx', '.yaml', '.json', '.h5', '.hdf5', '.model']
+            if source_path.suffix.lower() not in valid_extensions:
+                self.logger.warning(f"Unusual file extension for model: {source_path.suffix}")
+                
             target_path = version_dir / source_path.name
             shutil.copy2(source_path, target_path)
             relative_path = str(target_path.relative_to(self.registry_dir))
         else:
-            # Copy directory contents
+            # Copy directory contents with validation
             for item in source_path.glob('*'):
+                # Skip hidden files and directories
+                if item.name.startswith('.'):
+                    continue
+                    
                 if item.is_file():
+                    # Basic file validation
+                    if item.stat().st_size > 1024 * 1024 * 500:  # 500MB limit
+                        self.logger.warning(f"Skipping large file: {item} ({item.stat().st_size / (1024*1024):.2f} MB)")
+                        continue
                     shutil.copy2(item, version_dir / item.name)
                 else:
-                    shutil.copytree(item, version_dir / item.name)
+                    try:
+                        shutil.copytree(item, version_dir / item.name)
+                    except Exception as e:
+                        self.logger.error(f"Error copying directory {item}: {e}")
             relative_path = str(version_dir.relative_to(self.registry_dir))
         
         # Create model version

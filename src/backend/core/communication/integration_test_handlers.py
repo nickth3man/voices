@@ -90,10 +90,64 @@ def handle_test_pipeline(params: Dict[str, Any]) -> Dict[str, Any]:
             'error': 'Missing audio_path parameter'
         }
     
-    if not os.path.exists(audio_path):
+    # Validate and sanitize the audio path
+    try:
+        audio_path = Path(audio_path).resolve()
+        
+        # Check if file exists
+        if not audio_path.exists():
+            return {
+                'success': False,
+                'error': f'Audio file not found: {audio_path}'
+            }
+            
+        # Prevent path traversal attacks by checking if the resolved path is outside expected directories
+        # Get the absolute path of common parent directories that should contain audio files
+        allowed_parent_dirs = [
+            Path(os.getcwd()).resolve(),  # Current working directory
+            Path(os.path.expanduser("~")).resolve(),  # User's home directory
+            Path("/tmp").resolve() if os.name != 'nt' else Path(os.environ.get('TEMP', 'C:\\Windows\\Temp')).resolve(),  # Temp directory
+        ]
+        
+        # Check if the source path is within any allowed parent directory
+        is_allowed_path = any(
+            str(audio_path).startswith(str(parent_dir))
+            for parent_dir in allowed_parent_dirs
+        )
+        
+        if not is_allowed_path:
+            logger.warning(f"Potential path traversal attempt: {audio_path}")
+            return {
+                'success': False,
+                'error': f'Audio path is outside of allowed directories: {audio_path}'
+            }
+            
+        # Validate file type
+        if not audio_path.is_file():
+            return {
+                'success': False,
+                'error': f'Path is not a file: {audio_path}'
+            }
+            
+        # Check file extension
+        valid_extensions = ['.wav', '.mp3', '.flac', '.ogg', '.m4a', '.aac']
+        if audio_path.suffix.lower() not in valid_extensions:
+            return {
+                'success': False,
+                'error': f'Invalid audio file type: {audio_path.suffix}. Supported types: {", ".join(valid_extensions)}'
+            }
+            
+        # Basic size check
+        if audio_path.stat().st_size > 100 * 1024 * 1024:  # 100MB limit
+            return {
+                'success': False,
+                'error': f'Audio file too large: {audio_path.stat().st_size / (1024*1024):.2f} MB (max 100MB)'
+            }
+    except Exception as e:
+        logger.error(f"Error validating audio path: {e}")
         return {
             'success': False,
-            'error': f'Audio file not found: {audio_path}'
+            'error': f'Invalid audio path: {str(e)}'
         }
     
     try:
@@ -170,10 +224,64 @@ def handle_test_end_to_end(params: Dict[str, Any]) -> Dict[str, Any]:
             'error': 'Missing audio_path parameter'
         }
     
-    if not os.path.exists(audio_path):
+    # Validate and sanitize the audio path
+    try:
+        audio_path = Path(audio_path).resolve()
+        
+        # Check if file exists
+        if not audio_path.exists():
+            return {
+                'success': False,
+                'error': f'Audio file not found: {audio_path}'
+            }
+            
+        # Prevent path traversal attacks by checking if the resolved path is outside expected directories
+        # Get the absolute path of common parent directories that should contain audio files
+        allowed_parent_dirs = [
+            Path(os.getcwd()).resolve(),  # Current working directory
+            Path(os.path.expanduser("~")).resolve(),  # User's home directory
+            Path("/tmp").resolve() if os.name != 'nt' else Path(os.environ.get('TEMP', 'C:\\Windows\\Temp')).resolve(),  # Temp directory
+        ]
+        
+        # Check if the source path is within any allowed parent directory
+        is_allowed_path = any(
+            str(audio_path).startswith(str(parent_dir))
+            for parent_dir in allowed_parent_dirs
+        )
+        
+        if not is_allowed_path:
+            logger.warning(f"Potential path traversal attempt: {audio_path}")
+            return {
+                'success': False,
+                'error': f'Audio path is outside of allowed directories: {audio_path}'
+            }
+            
+        # Validate file type
+        if not audio_path.is_file():
+            return {
+                'success': False,
+                'error': f'Path is not a file: {audio_path}'
+            }
+            
+        # Check file extension
+        valid_extensions = ['.wav', '.mp3', '.flac', '.ogg', '.m4a', '.aac']
+        if audio_path.suffix.lower() not in valid_extensions:
+            return {
+                'success': False,
+                'error': f'Invalid audio file type: {audio_path.suffix}. Supported types: {", ".join(valid_extensions)}'
+            }
+            
+        # Basic size check
+        if audio_path.stat().st_size > 100 * 1024 * 1024:  # 100MB limit
+            return {
+                'success': False,
+                'error': f'Audio file too large: {audio_path.stat().st_size / (1024*1024):.2f} MB (max 100MB)'
+            }
+    except Exception as e:
+        logger.error(f"Error validating audio path: {e}")
         return {
             'success': False,
-            'error': f'Audio file not found: {audio_path}'
+            'error': f'Invalid audio path: {str(e)}'
         }
     
     try:
@@ -251,10 +359,64 @@ def handle_run_all_tests(params: Dict[str, Any]) -> Dict[str, Any]:
             'error': 'Missing audio_path parameter'
         }
     
-    if not os.path.exists(audio_path):
+    # Validate and sanitize the audio path
+    try:
+        audio_path = Path(audio_path).resolve()
+        
+        # Check if file exists
+        if not audio_path.exists():
+            return {
+                'success': False,
+                'error': f'Audio file not found: {audio_path}'
+            }
+            
+        # Prevent path traversal attacks by checking if the resolved path is outside expected directories
+        # Get the absolute path of common parent directories that should contain audio files
+        allowed_parent_dirs = [
+            Path(os.getcwd()).resolve(),  # Current working directory
+            Path(os.path.expanduser("~")).resolve(),  # User's home directory
+            Path("/tmp").resolve() if os.name != 'nt' else Path(os.environ.get('TEMP', 'C:\\Windows\\Temp')).resolve(),  # Temp directory
+        ]
+        
+        # Check if the source path is within any allowed parent directory
+        is_allowed_path = any(
+            str(audio_path).startswith(str(parent_dir))
+            for parent_dir in allowed_parent_dirs
+        )
+        
+        if not is_allowed_path:
+            logger.warning(f"Potential path traversal attempt: {audio_path}")
+            return {
+                'success': False,
+                'error': f'Audio path is outside of allowed directories: {audio_path}'
+            }
+            
+        # Validate file type
+        if not audio_path.is_file():
+            return {
+                'success': False,
+                'error': f'Path is not a file: {audio_path}'
+            }
+            
+        # Check file extension
+        valid_extensions = ['.wav', '.mp3', '.flac', '.ogg', '.m4a', '.aac']
+        if audio_path.suffix.lower() not in valid_extensions:
+            return {
+                'success': False,
+                'error': f'Invalid audio file type: {audio_path.suffix}. Supported types: {", ".join(valid_extensions)}'
+            }
+            
+        # Basic size check
+        if audio_path.stat().st_size > 100 * 1024 * 1024:  # 100MB limit
+            return {
+                'success': False,
+                'error': f'Audio file too large: {audio_path.stat().st_size / (1024*1024):.2f} MB (max 100MB)'
+            }
+    except Exception as e:
+        logger.error(f"Error validating audio path: {e}")
         return {
             'success': False,
-            'error': f'Audio file not found: {audio_path}'
+            'error': f'Invalid audio path: {str(e)}'
         }
     
     try:

@@ -54,6 +54,97 @@ class IntegrationTests(unittest.TestCase):
         import soundfile as sf
         sf.write(self.test_audio_path, self.test_audio, self.sample_rate)
         
+        # Create mock model directories and files with proper structure
+        self.mock_model_dir = self.test_dir / "mock_models"
+        os.makedirs(self.mock_model_dir, exist_ok=True)
+        
+        # Create mock SVoice model with minimal valid structure
+        self.svoice_model_dir = self.mock_model_dir / "svoice"
+        os.makedirs(self.svoice_model_dir, exist_ok=True)
+        
+        # Create a minimal valid PyTorch model file
+        import torch
+        import torch.nn as nn
+        
+        # Create a simple dummy model
+        class DummySVoiceModel(nn.Module):
+            def __init__(self):
+                super().__init__()
+                self.conv = nn.Conv1d(1, 2, 3, padding=1)  # Simple 1D convolution
+                
+            def forward(self, x):
+                return self.conv(x.unsqueeze(1)).transpose(1, 2)  # Return 2 channels (2 speakers)
+                
+            def separate(self, mixture, num_speakers=2, **kwargs):
+                # Mock separation function
+                if isinstance(mixture, np.ndarray):
+                    mixture_tensor = torch.from_numpy(mixture).float()
+                else:
+                    mixture_tensor = mixture
+                
+                # Create fake separated sources (2 speakers)
+                batch_size = 1
+                if len(mixture_tensor.shape) == 1:
+                    # Convert to batch format
+                    mixture_tensor = mixture_tensor.unsqueeze(0)
+                
+                # Simple processing to create two different outputs
+                result = torch.stack([
+                    mixture_tensor * 0.8,  # First speaker
+                    mixture_tensor * 0.6   # Second speaker
+                ])
+                
+                return result
+        
+        # Create and save the model
+        dummy_svoice = DummySVoiceModel()
+        torch.save(dummy_svoice.state_dict(), self.svoice_model_dir / "model.pt")
+        
+        # Create config file
+        with open(self.svoice_model_dir / "config.yaml", "w") as f:
+            f.write("name: mock_svoice\nversion: 1.0.0\nnum_speakers: 2\nmodel_type: svoice")
+            
+        # Create mock Demucs model with minimal valid structure
+        self.demucs_model_dir = self.mock_model_dir / "demucs"
+        os.makedirs(self.demucs_model_dir, exist_ok=True)
+        
+        # Create a simple dummy Demucs model
+        class DummyDemucsModel(nn.Module):
+            def __init__(self):
+                super().__init__()
+                self.conv = nn.Conv1d(1, 2, 3, padding=1)  # Simple 1D convolution
+                
+            def forward(self, x):
+                return self.conv(x.unsqueeze(1)).transpose(1, 2)  # Return 2 channels (2 speakers)
+                
+            def separate(self, mixture, num_speakers=2, **kwargs):
+                # Mock separation function
+                if isinstance(mixture, np.ndarray):
+                    mixture_tensor = torch.from_numpy(mixture).float()
+                else:
+                    mixture_tensor = mixture
+                
+                # Create fake separated sources (2 speakers)
+                if len(mixture_tensor.shape) == 1:
+                    # Convert to batch format
+                    mixture_tensor = mixture_tensor.unsqueeze(0)
+                
+                # Simple processing to create two different outputs
+                result = torch.stack([
+                    mixture_tensor * 0.7,  # First speaker
+                    mixture_tensor * 0.5   # Second speaker
+                ])
+                
+                return result
+        
+        # Create and save the model
+        dummy_demucs = DummyDemucsModel()
+        torch.save(dummy_demucs.state_dict(), self.demucs_model_dir / "model.pt")
+        
+        # Create config file
+        with open(self.demucs_model_dir / "config.yaml", "w") as f:
+            f.write("name: mock_demucs\nversion: 1.0.0\nnum_speakers: 2\nmodel_type: demucs")
+        
         # Initialize registry
         self.registry = ModelRegistry(str(self.registry_dir))
         
@@ -63,10 +154,43 @@ class IntegrationTests(unittest.TestCase):
         """Clean up after tests."""
         # Clean up test files
         import shutil
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+        import time
         
-        logger.info("Test environment cleaned up")
+        if self.test_dir.exists():
+            # First, ensure all file handles are released
+            import gc
+            gc.collect()
+            
+            # Try multiple times with increasing delays
+            max_attempts = 3
+            for attempt in range(max_attempts):
+                try:
+                    # Use ignore_errors=True to prevent test failures due to locked files
+                    shutil.rmtree(self.test_dir, ignore_errors=True)
+                    logger.info("Test directory removed successfully")
+                    break
+                except Exception as e:
+                    logger.warning(f"Error removing test directory (attempt {attempt+1}/{max_attempts}): {e}")
+                    
+                    # Fallback cleanup strategy - try to remove files individually
+                    try:
+                        for item in self.test_dir.glob('*'):
+                            try:
+                                if item.is_file():
+                                    item.unlink(missing_ok=True)
+                                elif item.is_dir():
+                                    shutil.rmtree(item, ignore_errors=True)
+                            except Exception as item_error:
+                                logger.warning(f"Could not remove {item}: {item_error}")
+                        logger.info("Fallback cleanup completed")
+                    except Exception as fallback_error:
+                        logger.error(f"Fallback cleanup failed: {fallback_error}")
+                    
+                    # Wait before retrying (increasing delay)
+                    if attempt < max_attempts - 1:
+                        time.sleep(1 * (attempt + 1))
+        
+        logger.info("Test environment cleanup completed")
     
     def test_model_registry_integration(self):
         """Test integration of model registry with adapters."""
@@ -75,12 +199,12 @@ class IntegrationTests(unittest.TestCase):
         self.registry.register_model_loader("svoice", get_model_loader("svoice"))
         self.registry.register_model_loader("demucs", get_model_loader("demucs"))
         
-        # Add dummy models
+        # Add mock models
         svoice_model_id, svoice_version_id = self.registry.add_model(
             name="SVoice Test",
             description="Test SVoice model",
             model_type="svoice",
-            model_path=str(self.test_dir),  # Just use test_dir as a placeholder
+            model_path=str(self.svoice_model_dir),  # Use mock SVoice model directory
             version_description="Initial version",
             parameters={"num_speakers": 2},
             metadata={"test": True}
@@ -90,7 +214,7 @@ class IntegrationTests(unittest.TestCase):
             name="Demucs Test",
             description="Test Demucs model",
             model_type="demucs",
-            model_path=str(self.test_dir),  # Just use test_dir as a placeholder
+            model_path=str(self.demucs_model_dir),  # Use mock Demucs model directory
             version_description="Initial version",
             parameters={"num_speakers": 2},
             metadata={"test": True}
@@ -158,6 +282,32 @@ class IntegrationTests(unittest.TestCase):
     
     def test_pipeline_integration(self):
         """Test integration of pipeline components."""
+        # Register model loaders first
+        from backend.processing.registry.model_adapters import get_model_loader
+        self.registry.register_model_loader("svoice", get_model_loader("svoice"))
+        self.registry.register_model_loader("demucs", get_model_loader("demucs"))
+        
+        # Add mock models to registry
+        svoice_model_id, _ = self.registry.add_model(
+            name="SVoice Pipeline Test",
+            description="Test SVoice model for pipeline testing",
+            model_type="svoice",
+            model_path=str(self.svoice_model_dir),
+            version_description="Pipeline test version",
+            parameters={"num_speakers": 2},
+            metadata={"test": True}
+        )
+        
+        demucs_model_id, _ = self.registry.add_model(
+            name="Demucs Pipeline Test",
+            description="Test Demucs model for pipeline testing",
+            model_type="demucs",
+            model_path=str(self.demucs_model_dir),
+            version_description="Pipeline test version",
+            parameters={"num_speakers": 2},
+            metadata={"test": True}
+        )
+        
         # Create pipeline
         pipeline = AudioProcessingPipeline(
             components=[
@@ -200,12 +350,12 @@ class IntegrationTests(unittest.TestCase):
     
     def test_end_to_end_integration(self):
         """Test end-to-end integration from model registry to pipeline."""
-        # Add dummy models to registry
+        # Add mock models to registry
         svoice_model_id, _ = self.registry.add_model(
             name="SVoice End-to-End",
             description="Test SVoice model for end-to-end testing",
             model_type="svoice",
-            model_path=str(self.test_dir),
+            model_path=str(self.svoice_model_dir),
             version_description="End-to-end test version"
         )
         

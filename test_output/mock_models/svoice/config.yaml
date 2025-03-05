@@ -1,0 +1,4 @@
+name: mock_svoice
+version: 1.0.0
+num_speakers: 2
+model_type: svoice
